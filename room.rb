@@ -9,6 +9,8 @@ class Room
     @money_received = money_received
     @guests = guests
     @capacity = capacity
+    @food = Hash.new(0)
+    @drinks = Hash.new(0)
   end
 
   def check_song(song_title)
@@ -65,6 +67,34 @@ class Room
       end
     end
     return "Guest is not in this room."
+  end
+
+  def minus_money(amount)
+    @money_received -= amount
+  end
+
+  def stock_level_drinks(drink)
+    return @drinks[drink]
+  end
+
+  def add_drink(drink)
+    if @drinks.include?(drink)
+      @drinks[drink] += 1
+    else
+      @drinks[drink] = 1
+    end
+  end
+
+  def stock_level_food(food)
+    return @food[food]
+  end
+
+  def add_food(food)
+    if @food.include?(food)
+      @food[food] += 1
+    else
+      @food[food] = 1
+    end 
   end
 
 end

@@ -20,7 +20,7 @@ class TestSong < Minitest::Test
   end
 
   def test_get_song_artist
-    assert_equal("Cher", @song2.artistd)
+    assert_equal("Cher", @song2.artist)
   end
 
 end

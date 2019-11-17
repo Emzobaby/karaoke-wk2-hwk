@@ -3,6 +3,7 @@ require('minitest/reporters')
 require_relative('../room')
 require_relative('../guest')
 require_relative('../song')
+require_relative('../stock')
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
@@ -114,5 +115,22 @@ class TestRoom < Minitest::Test
     @room3 = Room.new("Rock Out", @songs1, 5.00, 0.0, @guests)
     result = @room3.find_guest("Zack")
     assert_equal("Guest is not in this room.", result)
+  end
+
+  def test_minus_money_from_room
+      @room4 = Room.new("Country Hits", @songs1, 5.00, 20.00)
+    assert_equal(5, @room4.minus_money(15.00))
+  end
+
+  def test_add_drink_to_drinks_hash
+    @stock1 = Stock.new("prosecco", 15.00, "drink")
+    @room1.add_drink(@stock1)
+    assert_equal(1, @room1.stock_level_drinks(@stock1))
+  end
+
+  def test_add_food_to_food_hash
+    @stock6 = Stock.new("chips", 3.00, "food")
+    @room1.add_food(@stock6)
+    assert_equal(1, @room1.stock_level_food(@stock6))
   end
 end
